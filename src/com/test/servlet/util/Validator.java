@@ -11,6 +11,7 @@ public class Validator {
 		if (firstInputParameter == null || secondInputParameter == null) {
 			try {
 				response.getWriter().append("Please enter non-null input values 'a' and 'b'!");
+				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -20,6 +21,7 @@ public class Validator {
 		if (firstInputParameter.isEmpty() || secondInputParameter.isEmpty()) {
 			try {
 				response.getWriter().append("Please enter non-empty input values 'a' and 'b'!");
+				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
