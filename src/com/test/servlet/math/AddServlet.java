@@ -1,16 +1,41 @@
 package com.test.servlet.math;
 
 import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.test.servlet.util.Validator;
+
 @WebServlet("/add")
-public class AddServlet extends MathServlet{
+public class AddServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	@Override
-	protected void mathOperation(int a, int b, HttpServletResponse response) throws IOException {
-		
+	public AddServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String firstInputParameter = request.getParameter("a");
+		String secondInputParameter = request.getParameter("b");
+
+		Validator.validate(firstInputParameter, secondInputParameter, response);
+
+		int a = Integer.valueOf(firstInputParameter);
+		int b = Integer.valueOf(secondInputParameter);
+
 		response.getWriter().append("Sum is: " + (a + b));
-	}}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

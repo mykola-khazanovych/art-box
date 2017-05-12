@@ -1,19 +1,41 @@
 package com.test.servlet.math;
 
 import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class SubstractServlet
- */
+import com.test.servlet.util.Validator;
+
 @WebServlet("/sub")
-public class SubstractServlet extends MathServlet{
+public class SubstractServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	@Override
-	protected void mathOperation(int a, int b, HttpServletResponse response) throws IOException {
-		
-		response.getWriter().append("Substract is: " + (a - b));
-	}}
+	public SubstractServlet() {
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String firstInputParameter = request.getParameter("a");
+		String secondInputParameter = request.getParameter("b");
+
+		Validator.validate(firstInputParameter, secondInputParameter, response);
+
+		int a = Integer.valueOf(firstInputParameter);
+		int b = Integer.valueOf(secondInputParameter);
+
+		response.getWriter().append("Defference is: " + (a - b));
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
