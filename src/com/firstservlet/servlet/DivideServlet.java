@@ -1,4 +1,4 @@
-package com.test.servlet.math;
+package com.firstservlet.servlet;
 
 import java.io.IOException;
 
@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.test.servlet.util.Validator;
+import com.firstservlet.util.Validator;
 
-@WebServlet("/mul")
-public class MultiplyServlet extends HttpServlet{
+@WebServlet("/div")
+public class DivideServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	public MultiplyServlet() {
+	public DivideServlet() {
 		super();
 	}
 
@@ -29,8 +29,13 @@ public class MultiplyServlet extends HttpServlet{
 
 		int a = Integer.valueOf(firstInputParameter);
 		int b = Integer.valueOf(secondInputParameter);
+		
+		if(b == 0){
+			response.getWriter().append("Please enter non-zero divider!");
+			response.flushBuffer();
+		}
 
-		response.getWriter().append("Product is: " + (a * b));
+		response.getWriter().append("Division is: " + (a / b));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

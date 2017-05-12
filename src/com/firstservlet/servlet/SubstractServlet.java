@@ -1,4 +1,4 @@
-package com.test.servlet.math;
+package com.firstservlet.servlet;
 
 import java.io.IOException;
 
@@ -8,14 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.test.servlet.util.Validator;
+import com.firstservlet.util.Validator;
 
-@WebServlet("/add")
-public class AddServlet extends HttpServlet{
+@WebServlet("/sub")
+public class SubstractServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	public AddServlet() {
+	public SubstractServlet() {
 		super();
 	}
 
@@ -30,7 +30,7 @@ public class AddServlet extends HttpServlet{
 		int a = Integer.valueOf(firstInputParameter);
 		int b = Integer.valueOf(secondInputParameter);
 
-		response.getWriter().append("Sum is: " + (a + b));
+		response.getWriter().append("Defference is: " + (a - b));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
