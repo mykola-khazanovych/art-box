@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.util.Validator;
+import com.artbox.model.ArtBoxEntity;
+import com.artbox.model.ArtBoxStorage;
 
 @WebServlet("/add")
-public class AddServlet extends HttpServlet{
+public class AddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
-
+	
 	public AddServlet() {
 		super();
 	}
@@ -22,20 +24,48 @@ public class AddServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstInputParameter = request.getParameter("a");
-		String secondInputParameter = request.getParameter("b");
+		String theme = request.getParameter("theme");
+		String age = request.getParameter("age");
+		String cost = request.getParameter("cost");
 
-		Validator.validate(firstInputParameter, secondInputParameter, response);
+		if (Validator.validate(theme, age, cost, response)) {
+			
+			this.addArtBoxItem(theme, age, cost, response);
+		} else {
+			this.destroy();
+		}
 
-		int a = Integer.valueOf(firstInputParameter);
-		int b = Integer.valueOf(secondInputParameter);
-
-		response.getWriter().append("Sum is: " + (a + b));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+
+	private boolean addArtBoxItem(String theme, String age, String cost, HttpServletResponse response) {
+		
+		ArtBoxEntity artBoxItem = this.createArtBoxItem(theme, age, cost);
+		ArtBoxStorage database = ArtBoxStorage.getInstance();
+		
+		synchronized (this) {
+		database.add(artBoxItem);
+		}
+		
+		try {
+			response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost
+					+ " UAH) has been successfully added!");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+
+	private ArtBoxEntity createArtBoxItem(String theme, String stringAge, String stringCost) {
+		
+		short age = Short.parseShort(stringAge);
+		float cost = Float.parseFloat(stringCost);
+		return new ArtBoxEntity(theme, age, cost);
 	}
 
 }

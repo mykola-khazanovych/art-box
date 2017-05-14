@@ -25,7 +25,7 @@ public class MultiplyServlet extends HttpServlet{
 		String firstInputParameter = request.getParameter("a");
 		String secondInputParameter = request.getParameter("b");
 
-		Validator.validate(firstInputParameter, secondInputParameter, response);
+//		Validator.validate(firstInputParameter, secondInputParameter, response);
 
 		int a = Integer.valueOf(firstInputParameter);
 		int b = Integer.valueOf(secondInputParameter);
