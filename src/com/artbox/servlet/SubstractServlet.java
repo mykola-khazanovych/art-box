@@ -1,4 +1,4 @@
-package com.firstservlet.servlet;
+package com.artbox.servlet;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.firstservlet.util.Validator;
+import com.artbox.util.Validator;
 
 @WebServlet("/sub")
 public class SubstractServlet extends HttpServlet{
