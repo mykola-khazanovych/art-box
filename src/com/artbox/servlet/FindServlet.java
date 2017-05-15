@@ -12,9 +12,8 @@ import com.artbox.model.ArtBoxEntity;
 import com.artbox.model.ArtBoxStorage;
 import com.artbox.util.Validator;
 
-
 @WebServlet("/find")
-public class FindServlet extends HttpServlet{
+public class FindServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
 
@@ -27,9 +26,9 @@ public class FindServlet extends HttpServlet{
 
 		String theme = request.getParameter("theme");
 
-		Validator.validate(theme, response);
+		boolean inputParameterIsVaild = Validator.validate(theme, response);
 
-		if (Validator.validate(theme, response)) {
+		if (inputParameterIsVaild) {
 			this.find(theme, response);
 		} else {
 			this.destroy();
@@ -40,15 +39,15 @@ public class FindServlet extends HttpServlet{
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
-	private boolean find(String theme, HttpServletResponse response){
-		
+
+	private boolean find(String theme, HttpServletResponse response) {
+
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		boolean operationSuccessful = false;
 		ArtBoxEntity findArtBox = null;
 
 		synchronized (storage) {
-			
+
 			findArtBox = storage.find(theme);
 			if (findArtBox != null) {
 				operationSuccessful = true;
@@ -56,16 +55,19 @@ public class FindServlet extends HttpServlet{
 		}
 
 		this.getMessage(theme, operationSuccessful, response);
-		this.printItem(findArtBox, response);
-		
+
+		if (operationSuccessful) {
+			this.printItem(findArtBox, response);
+		}
+
 		return operationSuccessful;
 	}
-	
+
 	private void getMessage(String theme, boolean operationSuccessful, HttpServletResponse response) {
 
 		if (operationSuccessful) {
 			try {
-				response.getWriter().append("ArtBox with theme \"" + theme + "\" has been find!");
+				response.getWriter().append("ArtBox with theme \"" + theme + "\" has been find!").append("</p>");
 				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -79,8 +81,8 @@ public class FindServlet extends HttpServlet{
 			}
 		}
 	}
-	
-	private void printItem(ArtBoxEntity item, HttpServletResponse response){
+
+	private void printItem(ArtBoxEntity item, HttpServletResponse response) {
 		try {
 			response.getWriter().append(item.toString());
 			response.flushBuffer();

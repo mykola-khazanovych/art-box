@@ -27,8 +27,10 @@ public class AddServlet extends HttpServlet {
 		String theme = request.getParameter("theme");
 		String age = request.getParameter("age");
 		String cost = request.getParameter("cost");
+		
+		boolean inputParameterIsVaild = Validator.validate(theme, age, cost, response);
 
-		if (Validator.validate(theme, age, cost, response)) {
+		if (inputParameterIsVaild) {
 			this.addArtBoxItem(theme, age, cost, response);
 		} else {
 			this.destroy();

@@ -24,10 +24,9 @@ public class RemoveServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String id = request.getParameter("id");
+		boolean inputParameterIsVaild = Validator.validate(id, response);
 
-		Validator.validate(id, response);
-
-		if (Validator.validate(id, response)) {
+		if (inputParameterIsVaild) {
 			this.remove(id, response);
 		} else {
 			this.destroy();
@@ -58,7 +57,7 @@ public class RemoveServlet extends HttpServlet {
 
 		if (operationSuccessful) {
 			try {
-				response.getWriter().append("ArtBox with id" + id + " has been successfully removed!");
+				response.getWriter().append("ArtBox with id=" + id + " has been successfully removed!");
 				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();

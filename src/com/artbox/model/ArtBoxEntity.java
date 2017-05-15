@@ -14,6 +14,6 @@ private float cost;
 
 @Override
 public String toString(){
-	return "ArtBox: theme \"" + theme + " recommended age: " + age + " cost (w/o delivery) is " + cost;
+	return "ArtBox: theme \"" + theme + "\" recommended age: " + age + " cost (w/o delivery) is " + cost;
 }
 }

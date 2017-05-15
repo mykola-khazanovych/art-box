@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 //TODO Generic
 public class Validator {
 	
-	public static boolean validate(String id, HttpServletResponse response) {
+	public static boolean validate(String param, HttpServletResponse response) {
 		
-		if (id == null) {
+		if (param == null) {
 			try {
 				response.getWriter().append("Please enter non-null input value of request parameter!");
 				response.flushBuffer();
@@ -19,7 +19,7 @@ public class Validator {
 			return false;
 		}
 		
-		if (id.isEmpty()) {
+		if (param.isEmpty()) {
 			try {
 				response.getWriter().append("Please enter non-empty input value of requst parameter!");
 				response.flushBuffer();
