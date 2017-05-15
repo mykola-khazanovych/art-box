@@ -1,12 +1,16 @@
 package com.artbox.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ArtBoxStorage {
+	
 	private static volatile ArtBoxStorage instance;
-	private List<ArtBoxEntity> artBoxStorage = new ArrayList<>();
-
+	private static volatile short id = 1;
+	private volatile Map<Short,ArtBoxEntity> database = Collections.synchronizedMap(new HashMap<>());
+	
 	private ArtBoxStorage() {
 	};
 
@@ -22,8 +26,14 @@ public class ArtBoxStorage {
 		return instance;
 	}
 	
-	public Boolean add(ArtBoxEntity item){
-		this.artBoxStorage.add(item);
-		return true;
+	public boolean add(ArtBoxEntity item){
+		this.database.put(id, item);
+		id++;
+		return database.containsValue(item);
+	}
+	
+	public boolean remove(short id){
+		this.database.remove(id);
+		return !database.containsKey(id);
 	}
 }

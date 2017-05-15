@@ -16,7 +16,7 @@ import com.artbox.model.ArtBoxStorage;
 public class AddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
-	
+
 	public AddServlet() {
 		super();
 	}
@@ -29,7 +29,6 @@ public class AddServlet extends HttpServlet {
 		String cost = request.getParameter("cost");
 
 		if (Validator.validate(theme, age, cost, response)) {
-			
 			this.addArtBoxItem(theme, age, cost, response);
 		} else {
 			this.destroy();
@@ -37,35 +36,42 @@ public class AddServlet extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
+	private boolean addArtBoxItem(String theme, String age, String cost, HttpServletResponse response) {
+
+		ArtBoxEntity artBoxItem = this.createArtBoxItem(theme, age, cost);
+		ArtBoxStorage storage = ArtBoxStorage.getInstance();
+		boolean operationSuccessful = false;
+
+		synchronized (this) {
+			operationSuccessful = storage.add(artBoxItem);
+		}
+
+		if(operationSuccessful){
+		this.getMessage(theme, age, cost, response);}
+
+		return operationSuccessful;
 	}
 
-	private boolean addArtBoxItem(String theme, String age, String cost, HttpServletResponse response) {
-		
-		ArtBoxEntity artBoxItem = this.createArtBoxItem(theme, age, cost);
-		ArtBoxStorage database = ArtBoxStorage.getInstance();
-		
-		synchronized (this) {
-		database.add(artBoxItem);
-		}
-		
+	private ArtBoxEntity createArtBoxItem(String theme, String stringAge, String stringCost) {
+
+		short age = Short.parseShort(stringAge);
+		float cost = Float.parseFloat(stringCost);
+		return new ArtBoxEntity(theme, age, cost);
+	}
+	
+	private void getMessage(String theme, String age, String cost, HttpServletResponse response){
 		try {
 			response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost
 					+ " UAH) has been successfully added!");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return true;
 	}
+	
 
-	private ArtBoxEntity createArtBoxItem(String theme, String stringAge, String stringCost) {
-		
-		short age = Short.parseShort(stringAge);
-		float cost = Float.parseFloat(stringCost);
-		return new ArtBoxEntity(theme, age, cost);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }

@@ -4,13 +4,39 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
+//TODO Generic
 public class Validator {
-	public static boolean validate(String theme, String age, String cost,
-			HttpServletResponse response) {
+	
+	public static boolean validate(String id, HttpServletResponse response) {
+		
+		if (id == null) {
+			try {
+				response.getWriter().append("Please enter non-null input value of request parameter!");
+				response.flushBuffer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		if (id.isEmpty()) {
+			try {
+				response.getWriter().append("Please enter non-empty input value of requst parameter!");
+				response.flushBuffer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static boolean validate(String theme, String age, String cost, HttpServletResponse response) {
 
 		if (theme == null || age == null || cost == null) {
 			try {
-				response.getWriter().append("Please enter non-null input values 'Theme of ArtBox',"
+				response.getWriter().append("Please enter non-null input values of 'Theme of ArtBox',"
 						+ "'Recommended age' and 'Cost of purchase (w/o delivery)'!");
 				response.flushBuffer();
 			} catch (IOException e) {
@@ -21,7 +47,7 @@ public class Validator {
 
 		if (theme.isEmpty() || age.isEmpty() || cost.isEmpty()) {
 			try {
-				response.getWriter().append("Please enter non-empty  input values 'Theme of ArtBox',"
+				response.getWriter().append("Please enter non-empty  input values of 'Theme of ArtBox',"
 						+ "'Recommended age' and 'Cost of purchase (w/o delivery)'!");
 				response.flushBuffer();
 			} catch (IOException e) {
