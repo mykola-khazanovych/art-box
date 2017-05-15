@@ -8,39 +8,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.artbox.util.Validator;
+import com.artbox.model.ArtBoxStorage;
 
-@WebServlet("/div")
-public class DivideServlet extends HttpServlet{
+@WebServlet("/list")
+public class DisplayProductServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	public DivideServlet() {
+	public DisplayProductServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String firstInputParameter = request.getParameter("a");
-		String secondInputParameter = request.getParameter("b");
-
-	//	Validator.validate(firstInputParameter, secondInputParameter, response);
-
-		int a = Integer.valueOf(firstInputParameter);
-		int b = Integer.valueOf(secondInputParameter);
-		
-		if(b == 0){
-			response.getWriter().append("Please enter non-zero divider!");
-			response.flushBuffer();
-		}
-
-		response.getWriter().append("Division is: " + (a / b));
+	this.displayProduct(response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+	}
+	
+	private void displayProduct(HttpServletResponse response){
+		ArtBoxStorage storage = ArtBoxStorage.getInstance();
+		storage.printDatabase(response);
 	}
 
 }

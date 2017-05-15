@@ -46,8 +46,7 @@ public class AddServlet extends HttpServlet {
 			operationSuccessful = storage.add(artBoxItem);
 		}
 
-		if(operationSuccessful){
-		this.getMessage(theme, age, cost, response);}
+		this.getMessage(theme, age, cost, operationSuccessful, response);
 
 		return operationSuccessful;
 	}
@@ -58,16 +57,28 @@ public class AddServlet extends HttpServlet {
 		float cost = Float.parseFloat(stringCost);
 		return new ArtBoxEntity(theme, age, cost);
 	}
-	
-	private void getMessage(String theme, String age, String cost, HttpServletResponse response){
-		try {
-			response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost
-					+ " UAH) has been successfully added!");
-		} catch (IOException e) {
-			e.printStackTrace();
+
+	private void getMessage(String theme, String age, String cost, boolean operationSuccessful,
+			HttpServletResponse response) {
+
+		if (operationSuccessful) {
+			try {
+				response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost
+						+ " UAH) has been successfully added!");
+				response.flushBuffer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				response.getWriter().append("ERROR occured during ArtBox (\"" + theme + "\", for " + age
+						+ " year(s) age, with price " + cost + " UAH) adding!");
+				response.flushBuffer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

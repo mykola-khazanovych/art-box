@@ -8,27 +8,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.artbox.model.ArtBoxEntity;
 import com.artbox.model.ArtBoxStorage;
 import com.artbox.util.Validator;
 
-@WebServlet("/remove")
-public class RemoveServlet extends HttpServlet {
+
+@WebServlet("/find")
+public class FindServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	public RemoveServlet() {
+	public FindServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String id = request.getParameter("id");
+		String theme = request.getParameter("theme");
 
-		Validator.validate(id, response);
+		Validator.validate(theme, response);
 
-		if (Validator.validate(id, response)) {
-			this.remove(id, response);
+		if (Validator.validate(theme, response)) {
+			this.find(theme, response);
 		} else {
 			this.destroy();
 		}
@@ -38,38 +40,52 @@ public class RemoveServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
-	private boolean remove(String id, HttpServletResponse response) {
-
+	
+	private boolean find(String theme, HttpServletResponse response){
+		
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		short idShort = Short.parseShort(id);
 		boolean operationSuccessful = false;
+		ArtBoxEntity findArtBox = null;
 
 		synchronized (storage) {
-			operationSuccessful = storage.remove(idShort);
+			
+			findArtBox = storage.find(theme);
+			if (findArtBox != null) {
+				operationSuccessful = true;
+			}
 		}
 
-		this.getMessage(id, operationSuccessful, response);
+		this.getMessage(theme, operationSuccessful, response);
+		this.printItem(findArtBox, response);
 		
 		return operationSuccessful;
 	}
-
-	private void getMessage(String id, boolean operationSuccessful, HttpServletResponse response) {
+	
+	private void getMessage(String theme, boolean operationSuccessful, HttpServletResponse response) {
 
 		if (operationSuccessful) {
 			try {
-				response.getWriter().append("ArtBox with id" + id + " has been successfully removed!");
+				response.getWriter().append("ArtBox with theme \"" + theme + "\" has been find!");
 				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
 			try {
-				response.getWriter().append("ERROR! There is no ArtBox with id" + id + " in the storage!");
+				response.getWriter().append("ERROR! There is no ArtBox with theme \"" + theme + "\" in the storage!");
 				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	private void printItem(ArtBoxEntity item, HttpServletResponse response){
+		try {
+			response.getWriter().append(item.toString());
+			response.flushBuffer();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
