@@ -15,6 +15,7 @@ import com.artbox.util.Validator;
 public class RemoveServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
+	private HttpServletResponse response;
 
 	public RemoveServlet() {
 		super();
@@ -23,13 +24,18 @@ public class RemoveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String id = request.getParameter("id");
+		this.response = response;
+
+		final String REQUEST_PARAMETER_ART_BOX_ID = "id";
+		String id = request.getParameter(REQUEST_PARAMETER_ART_BOX_ID);
+
 		boolean inputParameterIsVaild = Validator.validateNonNullOrEmptyInput(id);
 
 		if (inputParameterIsVaild) {
-			this.remove(id, response);
+			this.remove(id);
 		} else {
-			this.destroy();
+			response.getWriter().append("Please enter non-null/non-empty input value of request parameter!");
+			response.flushBuffer();
 		}
 	}
 
@@ -38,38 +44,20 @@ public class RemoveServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private boolean remove(String id, HttpServletResponse response) {
+	private boolean remove(String stringId) throws ServletException, IOException{
 
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		short idShort = Short.parseShort(id);
-		boolean operationSuccessful = false;
+		short id = Short.parseShort(stringId);
+		boolean operationSuccessful = storage.remove(id);
 
-		synchronized (storage) {
-			operationSuccessful = storage.remove(idShort);
+		if (operationSuccessful) {
+				response.getWriter().append("ArtBox with id=" + id + " has been successfully removed!");
+				response.flushBuffer();
+		} else {
+				response.getWriter().append("ERROR! There is no ArtBox with id" + id + " in the storage!");
+				response.flushBuffer();
 		}
-
-		this.getMessage(id, operationSuccessful, response);
 		
 		return operationSuccessful;
 	}
-
-	private void getMessage(String id, boolean operationSuccessful, HttpServletResponse response) {
-
-		if (operationSuccessful) {
-			try {
-				response.getWriter().append("ArtBox with id=" + id + " has been successfully removed!");
-				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				response.getWriter().append("ERROR! There is no ArtBox with id" + id + " in the storage!");
-				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 }

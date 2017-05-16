@@ -35,7 +35,8 @@ public class FindServlet extends HttpServlet {
 		if (inputParameterIsVaild) {
 			this.find(theme);
 		} else {
-
+			response.getWriter().append("Please enter non-null/non-empty input value of request parameter!");
+			response.flushBuffer();
 		}
 	}
 
