@@ -76,8 +76,7 @@ public class ArtBoxStorage {
 		while (iter.hasNext()) {
 			Map.Entry<Short, ArtBoxEntity> en = (Map.Entry<Short, ArtBoxEntity>) iter.next();
 			try {
-				response.getWriter().append("id = " + en.getKey() + " ").append(en.getValue().toString())
-						.append("</p>");
+				response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "</p>");
 				response.flushBuffer();
 			} catch (IOException e) {
 				e.printStackTrace();

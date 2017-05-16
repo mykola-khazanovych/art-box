@@ -45,6 +45,11 @@ public class AddServlet extends HttpServlet {
 		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
 	private boolean addArtBoxItem(String theme, String stringAge, String stringCost) throws ServletException, IOException {
 
 		short age = Short.parseShort(stringAge);
@@ -64,10 +69,5 @@ public class AddServlet extends HttpServlet {
 		}
 
 		return operationSuccessful;
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }
