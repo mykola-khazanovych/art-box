@@ -1,7 +1,6 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,93 +38,36 @@ public class AddServlet extends HttpServlet {
 		boolean isParameterVaild = Validator.validateNonNullOrEmptyInput(theme, age, cost);
 
 		if (isParameterVaild) {
-			this.addArtBoxItem(theme, age, cost, response);
+			this.addArtBoxItem(theme, age, cost);
 		} else {
-			PrintWriter out = response.getWriter();
-			out.println("Please enter non-null/non-empty input values of request parameters!");
+			response.getWriter().append("Please enter non-null/non-empty input values of request parameters!");
 			response.flushBuffer();
 		}
 	}
 
-	private boolean addArtBoxItem(String theme, String age, String cost, HttpServletResponse response) {
-
-		ArtBoxEntity artBoxItem = this.createArtBoxItem(theme, age, cost);
-		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		boolean operationSuccessful = false;
-
-		synchronized (this) {
-			operationSuccessful = storage.add(artBoxItem);
-		}
-
-		this.getMessage(theme, age, cost, operationSuccessful, response);
-
-		return operationSuccessful;
-	}
-
-	private ArtBoxEntity createArtBoxItem(String theme, String stringAge, String stringCost) {
+	private boolean addArtBoxItem(String theme, String stringAge, String stringCost) throws ServletException, IOException {
 
 		short age = Short.parseShort(stringAge);
 		float cost = Float.parseFloat(stringCost);
-		return new ArtBoxEntity(theme, age, cost);
-	}
-
-	private void getMessage(String theme, String age, String cost, boolean operationSuccessful,
-			HttpServletResponse response) {
+		
+		ArtBoxStorage storage = ArtBoxStorage.getInstance();
+		boolean operationSuccessful = storage.add( new ArtBoxEntity(theme, age, cost));
 
 		if (operationSuccessful) {
-			try {
 				response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost
 						+ " UAH) has been successfully added!");
 				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		} else {
-			try {
 				response.getWriter().append("ERROR occured during ArtBox (\"" + theme + "\", for " + age
 						+ " year(s) age, with price " + cost + " UAH) adding!");
 				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 		}
+
+		return operationSuccessful;
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-/*
-	+++++
-	try {
-				response.getWriter().append("Please enter non-null input value of request parameter!");
-				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	
-	try {
-		response.getWriter().append("Please enter non-empty input value of requst parameter!");
-		response.flushBuffer();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-	
-	try {
-		response.getWriter().append("Please enter non-null input values of 'Theme of ArtBox',"
-				+ "'Recommended age' and 'Cost of purchase (w/o delivery)'!");
-		response.flushBuffer();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-	
-	try {
-		response.getWriter().append("Please enter non-empty  input values of 'Theme of ArtBox',"
-				+ "'Recommended age' and 'Cost of purchase (w/o delivery)'!");
-		response.flushBuffer();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-	**/
-	
 }
