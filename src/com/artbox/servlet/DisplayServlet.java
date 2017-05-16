@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.artbox.storage.ArtBoxStorage;
 
 @WebServlet("/list")
-public class DisplayProductServlet extends HttpServlet{
+public class DisplayServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 485135717800530684L;
 
-	public DisplayProductServlet() {
+	public DisplayServlet() {
 		super();
 	}
 
