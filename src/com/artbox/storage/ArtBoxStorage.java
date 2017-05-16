@@ -1,14 +1,11 @@
 package com.artbox.storage;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
-import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.model.ArtBoxEntity;
 
@@ -59,28 +56,8 @@ public class ArtBoxStorage {
 		return null;
 	}
 
-	public void printDatabase(HttpServletResponse response) {
+	public Set<Map.Entry<Short, ArtBoxEntity>> getDatabase() {
 
-		Set<Map.Entry<Short, ArtBoxEntity>> ArtBoxCollection = this.database.entrySet();
-		Iterator<Map.Entry<Short, ArtBoxEntity>> iter = ArtBoxCollection.iterator();
-
-		if (ArtBoxCollection.isEmpty()) {
-			try {
-				response.getWriter().append("Sorry! Database is empty!");
-				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		while (iter.hasNext()) {
-			Map.Entry<Short, ArtBoxEntity> en = (Map.Entry<Short, ArtBoxEntity>) iter.next();
-			try {
-				response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "</p>");
-				response.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+		return this.database.entrySet();
 	}
 }
