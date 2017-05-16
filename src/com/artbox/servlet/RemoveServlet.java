@@ -24,7 +24,7 @@ public class RemoveServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String id = request.getParameter("id");
-		boolean inputParameterIsVaild = Validator.validate(id, response);
+		boolean inputParameterIsVaild = Validator.validateNonNullOrEmptyInput(id);
 
 		if (inputParameterIsVaild) {
 			this.remove(id, response);

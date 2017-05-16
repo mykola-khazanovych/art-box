@@ -26,7 +26,7 @@ public class FindServlet extends HttpServlet {
 
 		String theme = request.getParameter("theme");
 
-		boolean inputParameterIsVaild = Validator.validate(theme, response);
+		boolean inputParameterIsVaild = Validator.validateNonNullOrEmptyInput(theme);
 
 		if (inputParameterIsVaild) {
 			this.find(theme, response);

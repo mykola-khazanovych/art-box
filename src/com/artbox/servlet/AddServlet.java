@@ -1,6 +1,7 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import com.artbox.storage.ArtBoxStorage;
 public class AddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
+	private HttpServletResponse response;
 
 	public AddServlet() {
 		super();
@@ -24,18 +26,25 @@ public class AddServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String theme = request.getParameter("theme");
-		String age = request.getParameter("age");
-		String cost = request.getParameter("cost");
+		this.response = response;
 		
-		boolean inputParameterIsVaild = Validator.validate(theme, age, cost, response);
+		final String REQUEST_PARAMETER_ART_BOX_THEME = "theme";
+		final String REQUEST_PARAMETER_ART_BOX_RECOMMENDED_AGE = "age";
+		final String REQUEST_PARAMETER_ART_BOX_COST = "cost";
+		
+		String theme = request.getParameter(REQUEST_PARAMETER_ART_BOX_THEME);
+		String age = request.getParameter(REQUEST_PARAMETER_ART_BOX_RECOMMENDED_AGE);
+		String cost = request.getParameter(REQUEST_PARAMETER_ART_BOX_COST);
+		
+		boolean isParameterVaild = Validator.validateNonNullOrEmptyInput(theme, age, cost);
 
-		if (inputParameterIsVaild) {
+		if (isParameterVaild) {
 			this.addArtBoxItem(theme, age, cost, response);
 		} else {
-			this.destroy();
+			PrintWriter out = response.getWriter();
+			out.println("Please enter non-null/non-empty input values of request parameters!");
+			response.flushBuffer();
 		}
-
 	}
 
 	private boolean addArtBoxItem(String theme, String age, String cost, HttpServletResponse response) {
@@ -86,5 +95,37 @@ public class AddServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
+/*
+	+++++
+	try {
+				response.getWriter().append("Please enter non-null input value of request parameter!");
+				response.flushBuffer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+	try {
+		response.getWriter().append("Please enter non-empty input value of requst parameter!");
+		response.flushBuffer();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	
+	try {
+		response.getWriter().append("Please enter non-null input values of 'Theme of ArtBox',"
+				+ "'Recommended age' and 'Cost of purchase (w/o delivery)'!");
+		response.flushBuffer();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	
+	try {
+		response.getWriter().append("Please enter non-empty  input values of 'Theme of ArtBox',"
+				+ "'Recommended age' and 'Cost of purchase (w/o delivery)'!");
+		response.flushBuffer();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	**/
+	
 }
