@@ -27,15 +27,14 @@ public class DisplayServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-
 		Set<Map.Entry<Short, ArtBoxEntity>> ArtBoxCollection = storage.getDatabase();
-		Iterator<Map.Entry<Short, ArtBoxEntity>> iter = ArtBoxCollection.iterator();
 
 		if (ArtBoxCollection.isEmpty()) {
 			response.getWriter().append("Sorry! Database is empty!");
 			response.flushBuffer();
 		}
 
+		Iterator<Map.Entry<Short, ArtBoxEntity>> iter = ArtBoxCollection.iterator();
 		while (iter.hasNext()) {
 			Map.Entry<Short, ArtBoxEntity> en = (Map.Entry<Short, ArtBoxEntity>) iter.next();
 			response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "</p>");

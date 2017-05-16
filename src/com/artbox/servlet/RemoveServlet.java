@@ -48,7 +48,7 @@ public class RemoveServlet extends HttpServlet {
 
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		short id = Short.parseShort(stringId);
-		boolean operationSuccessful = storage.remove(id);
+		boolean operationSuccessful = storage.removeById(id);
 
 		if (operationSuccessful) {
 				response.getWriter().append("ArtBox with id=" + id + " has been successfully removed!");

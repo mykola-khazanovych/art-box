@@ -36,12 +36,12 @@ public class ArtBoxStorage {
 		return database.containsValue(item);
 	}
 
-	public boolean remove(short id) {
+	public boolean removeById(short id) {
 		this.database.remove(id);
 		return !database.containsKey(id);
 	}
 
-	public ArtBoxEntity find(String theme) {
+	public ArtBoxEntity findByTheme(String theme) {
 
 		Collection<ArtBoxEntity> ArtBoxCollection = this.database.values();
 		Iterator<ArtBoxEntity> iter = ArtBoxCollection.iterator();

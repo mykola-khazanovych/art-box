@@ -50,7 +50,7 @@ public class FindServlet extends HttpServlet {
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		boolean operationSuccessful = false;
 
-		ArtBoxEntity findArtBox = storage.find(theme);
+		ArtBoxEntity findArtBox = storage.findByTheme(theme);
 		if (findArtBox != null) {
 			operationSuccessful = true;
 		}
