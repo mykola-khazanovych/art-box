@@ -58,6 +58,6 @@ public class ArtBoxStorage {
 
 	public Set<Map.Entry<Short, ArtBoxEntity>> getDatabase() {
 
-		return this.database.entrySet();
+		return Collections.unmodifiableSet(this.database.entrySet());
 	}
 }
