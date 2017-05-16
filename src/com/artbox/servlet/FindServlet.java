@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.model.ArtBoxEntity;
-import com.artbox.model.ArtBoxStorage;
+import com.artbox.storage.ArtBoxStorage;
 import com.artbox.util.Validator;
 
 @WebServlet("/find")

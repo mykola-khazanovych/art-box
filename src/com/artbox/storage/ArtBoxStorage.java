@@ -1,4 +1,4 @@
-package com.artbox.model;
+package com.artbox.storage;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
+
+import com.artbox.model.ArtBoxEntity;
 
 public class ArtBoxStorage {
 
