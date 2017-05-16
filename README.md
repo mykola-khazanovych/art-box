@@ -1,6 +1,6 @@
-# art-box;
+# art-box web-site project;
 
-<h1>Training grounds to learn java+web engineering.</h1>
+<h2>Training grounds to learn java+web engineering.</h2>
 </p>
 <h3>Request examples</h3>
 </p>
@@ -15,3 +15,4 @@ http://localhost:8080/FirstServlet/add?theme=SPRING&age=4&cost=170.00
 FIND by theme
 </p>
 http://localhost:8080/FirstServlet/find?theme=BEARS
+</p>
