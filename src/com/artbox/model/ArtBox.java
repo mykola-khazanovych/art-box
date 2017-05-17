@@ -3,14 +3,14 @@ package com.artbox.model;
 public class ArtBox {
 
 	private String theme;
-	private short age;
+	private int age;
 	private float cost;
 
 	public ArtBox() {
 		super();
 	}
 	
-	public ArtBox(String theme, short age, float cost) {
+	public ArtBox(String theme, int age, float cost) {
 		this.theme = theme;
 		this.age = age;
 		this.cost = cost;
@@ -21,7 +21,7 @@ public class ArtBox {
 	}
 
 
-	public short getAge() {
+	public int getAge() {
 		return age;
 	}
 
