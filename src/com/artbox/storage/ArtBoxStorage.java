@@ -12,8 +12,8 @@ import com.artbox.model.ArtBox;
 public class ArtBoxStorage {
 
 	private static volatile ArtBoxStorage instance;
-	private static volatile short id = 1;
-	private volatile Map<Short, ArtBox> database = Collections.synchronizedMap(new HashMap<>());
+	private static volatile int id = 1;
+	private volatile Map<Integer, ArtBox> database = Collections.synchronizedMap(new HashMap<>());
 
 	private ArtBoxStorage() {
 	};
@@ -56,7 +56,7 @@ public class ArtBoxStorage {
 		return null;
 	}
 
-	public Set<Map.Entry<Short, ArtBox>> getDatabase() {
+	public Set<Map.Entry<Integer, ArtBox>> getDatabase() {
 
 		return Collections.unmodifiableSet(this.database.entrySet());
 	}
