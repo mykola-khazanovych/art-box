@@ -7,13 +7,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import com.artbox.model.ArtBoxEntity;
+import com.artbox.model.ArtBox;
 
 public class ArtBoxStorage {
 
 	private static volatile ArtBoxStorage instance;
 	private static volatile short id = 1;
-	private volatile Map<Short, ArtBoxEntity> database = Collections.synchronizedMap(new HashMap<>());
+	private volatile Map<Short, ArtBox> database = Collections.synchronizedMap(new HashMap<>());
 
 	private ArtBoxStorage() {
 	};
@@ -30,7 +30,7 @@ public class ArtBoxStorage {
 		return instance;
 	}
 
-	public boolean add(ArtBoxEntity item) {
+	public boolean add(ArtBox item) {
 		this.database.put(id, item);
 		id++;
 		return database.containsValue(item);
@@ -41,13 +41,13 @@ public class ArtBoxStorage {
 		return !database.containsKey(id);
 	}
 
-	public ArtBoxEntity findByTheme(String theme) {
+	public ArtBox findByTheme(String theme) {
 
-		Collection<ArtBoxEntity> ArtBoxCollection = this.database.values();
-		Iterator<ArtBoxEntity> iter = ArtBoxCollection.iterator();
+		Collection<ArtBox> ArtBoxCollection = this.database.values();
+		Iterator<ArtBox> iter = ArtBoxCollection.iterator();
 
 		while (iter.hasNext()) {
-			ArtBoxEntity en = (ArtBoxEntity) iter.next();
+			ArtBox en = (ArtBox) iter.next();
 			if (en.getTheme().equalsIgnoreCase(theme)) {
 				return en;
 			}
@@ -56,7 +56,7 @@ public class ArtBoxStorage {
 		return null;
 	}
 
-	public Set<Map.Entry<Short, ArtBoxEntity>> getDatabase() {
+	public Set<Map.Entry<Short, ArtBox>> getDatabase() {
 
 		return Collections.unmodifiableSet(this.database.entrySet());
 	}

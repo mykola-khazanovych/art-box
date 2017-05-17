@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.util.Validator;
-import com.artbox.model.ArtBoxEntity;
+import com.artbox.model.ArtBox;
 import com.artbox.storage.ArtBoxStorage;
 
 @WebServlet("/add")
@@ -56,7 +56,7 @@ public class AddServlet extends HttpServlet {
 		float cost = Float.parseFloat(stringCost);
 		
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		boolean operationSuccessful = storage.add( new ArtBoxEntity(theme, age, cost));
+		boolean operationSuccessful = storage.add( new ArtBox(theme, age, cost));
 
 		if (operationSuccessful) {
 				response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost

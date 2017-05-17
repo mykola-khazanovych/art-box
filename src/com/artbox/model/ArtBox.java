@@ -1,16 +1,16 @@
 package com.artbox.model;
 
-public class ArtBoxEntity {
+public class ArtBox {
 
 	private String theme;
 	private short age;
 	private float cost;
 
-	public ArtBoxEntity() {
+	public ArtBox() {
 		super();
 	}
 	
-	public ArtBoxEntity(String theme, short age, float cost) {
+	public ArtBox(String theme, short age, float cost) {
 		this.theme = theme;
 		this.age = age;
 		this.cost = cost;

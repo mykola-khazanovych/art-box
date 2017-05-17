@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.artbox.model.ArtBoxEntity;
+import com.artbox.model.ArtBox;
 import com.artbox.storage.ArtBoxStorage;
 import com.artbox.util.Validator;
 
@@ -50,7 +50,7 @@ public class FindServlet extends HttpServlet {
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		boolean operationSuccessful = false;
 
-		ArtBoxEntity findArtBox = storage.findByTheme(theme);
+		ArtBox findArtBox = storage.findByTheme(theme);
 		if (findArtBox != null) {
 			operationSuccessful = true;
 		}

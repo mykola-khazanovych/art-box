@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.artbox.model.ArtBoxEntity;
+import com.artbox.model.ArtBox;
 import com.artbox.storage.ArtBoxStorage;
 
 @WebServlet("/list")
@@ -27,16 +27,16 @@ public class DisplayServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		Set<Map.Entry<Short, ArtBoxEntity>> ArtBoxCollection = storage.getDatabase();
+		Set<Map.Entry<Short, ArtBox>> ArtBoxCollection = storage.getDatabase();
 
 		if (ArtBoxCollection.isEmpty()) {
 			response.getWriter().append("Sorry! Database is empty!");
 			response.flushBuffer();
 		}
 
-		Iterator<Map.Entry<Short, ArtBoxEntity>> iter = ArtBoxCollection.iterator();
+		Iterator<Map.Entry<Short, ArtBox>> iter = ArtBoxCollection.iterator();
 		while (iter.hasNext()) {
-			Map.Entry<Short, ArtBoxEntity> en = (Map.Entry<Short, ArtBoxEntity>) iter.next();
+			Map.Entry<Short, ArtBox> en = (Map.Entry<Short, ArtBox>) iter.next();
 			response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "</p>");
 			response.flushBuffer();
 		}
