@@ -2,20 +2,20 @@ package com.artbox.util;
 
 public class Validator {
 
-	public static boolean validateNonNullOrEmptyInput(String... param) {
+	public static boolean isBlank(String... param) {
 		
 		for (String s : param) {
 			if (s == null) {
-				return false;
+				return true;
 			}
 		}
 		
 		for (String s : param) {
 			if (s.isEmpty()) {
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 }

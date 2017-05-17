@@ -1,6 +1,7 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,10 @@ import com.artbox.storage.ArtBoxStorage;
 public class AddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
-	private HttpServletResponse response;
+
+	private static final String ART_BOX_THEME = "theme";
+	private static final String ART_BOX_RECOMMENDED_AGE = "age";
+	private static final String ART_BOX_COST = "cost";
 
 	public AddServlet() {
 		super();
@@ -25,49 +29,48 @@ public class AddServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		this.response = response;
-		
-		final String REQUEST_PARAMETER_ART_BOX_THEME = "theme";
-		final String REQUEST_PARAMETER_ART_BOX_RECOMMENDED_AGE = "age";
-		final String REQUEST_PARAMETER_ART_BOX_COST = "cost";
-		
-		String theme = request.getParameter(REQUEST_PARAMETER_ART_BOX_THEME);
-		String age = request.getParameter(REQUEST_PARAMETER_ART_BOX_RECOMMENDED_AGE);
-		String cost = request.getParameter(REQUEST_PARAMETER_ART_BOX_COST);
-		
-		boolean isParameterVaild = Validator.validateNonNullOrEmptyInput(theme, age, cost);
+		String stringTheme = request.getParameter(ART_BOX_THEME);
+		String stringAge = request.getParameter(ART_BOX_RECOMMENDED_AGE);
+		String stringCost = request.getParameter(ART_BOX_COST);
 
-		if (isParameterVaild) {
-			this.addArtBoxItem(theme, age, cost);
-		} else {
+		if (Validator.isBlank(stringTheme, stringAge, stringCost)) {
+
 			response.getWriter().append("Please enter non-null/non-empty input values of request parameters!");
 			response.flushBuffer();
+			
+		} else {
+			
+			PrintWriter out = response.getWriter();
+
+			int age = 0;
+			float cost = 0;
+			try {
+				age = Short.parseShort(stringAge);
+				cost = Float.parseFloat(stringCost);
+			} catch (NumberFormatException nfe) {
+				out.println("You've entered incorrect 'recommended age' and/or 'cost' values!");
+				nfe.printStackTrace();
+				response.flushBuffer();
+				this.destroy();
+			}
+
+			ArtBoxStorage storage = ArtBoxStorage.getInstance();
+			if (storage.add(new ArtBox(stringTheme, age, cost))) {
+
+				out.println("ArtBox (\"" + stringTheme + "\", for " + age + " year(s) age, with price " + cost
+						+ " UAH) has been successfully added!");
+				response.flushBuffer();
+
+			} else {
+				out.println("ERROR occured during ArtBox (\"" + stringTheme + "\", for " + age
+						+ " year(s) age, with price " + cost + " UAH) adding!");
+				response.flushBuffer();
+			}
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-	}
-
-	private boolean addArtBoxItem(String theme, String stringAge, String stringCost) throws ServletException, IOException {
-
-		short age = Short.parseShort(stringAge);
-		float cost = Float.parseFloat(stringCost);
-		
-		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		boolean operationSuccessful = storage.add( new ArtBox(theme, age, cost));
-
-		if (operationSuccessful) {
-				response.getWriter().append("ArtBox (\"" + theme + "\", for " + age + " year(s) age, with price " + cost
-						+ " UAH) has been successfully added!");
-				response.flushBuffer();
-		} else {
-				response.getWriter().append("ERROR occured during ArtBox (\"" + theme + "\", for " + age
-						+ " year(s) age, with price " + cost + " UAH) adding!");
-				response.flushBuffer();
-		}
-
-		return operationSuccessful;
 	}
 }

@@ -30,7 +30,7 @@ public class FindServlet extends HttpServlet {
 		final String REQUEST_PARAMETER_ART_BOX_THEME = "theme";
 		String theme = request.getParameter(REQUEST_PARAMETER_ART_BOX_THEME);
 
-		boolean inputParameterIsVaild = Validator.validateNonNullOrEmptyInput(theme);
+		boolean inputParameterIsVaild = Validator.isBlank(theme);
 
 		if (inputParameterIsVaild) {
 			this.find(theme);
