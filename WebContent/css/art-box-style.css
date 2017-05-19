@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+table#baseLayout, tr#baseLayout, td#baseLayout {
+	border: 1px solid silver;
+	border-collapse: collapse;
+	text-align: center;
+	border-radius: 3px;
+	
+}
+
+table#baseLayout, td#noLayout{
+	border-style: none;
+}
+
+.fillingImage{
+	width: 100%;
+	border-radius: 5px;
+}
+
+.alignCenter {
+	text-align: center;
+}
+
+.alignCenterImg {
+	display: block;
+	margin: 0 auto;
+}
+
+.backgroundColorCells{
+	background-color: #deffb3;
+	<!--10% of yellow-green-->
+}
+
+.loraFont {
+	font-family: Lora, verdana;
+}
