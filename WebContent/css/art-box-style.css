@@ -21,6 +21,10 @@ table#baseLayout, td#noLayout{
 	text-align: center;
 }
 
+.alignRight{
+	text-align: right;
+}
+
 .alignCenterImg {
 	display: block;
 	margin: 0 auto;
@@ -33,4 +37,9 @@ table#baseLayout, td#noLayout{
 
 .loraFont {
 	font-family: Lora, verdana;
+}
+
+.textColorFooter{
+	color: #8080ff;
+	<!-- light navy blue-->
 }
