@@ -1,7 +1,6 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,10 +33,8 @@ public class DisplayServlet extends HttpServlet {
 			response.flushBuffer();
 		}
 
-		Iterator<Map.Entry<Integer, ArtBox>> iter = ArtBoxCollection.iterator();
-		while (iter.hasNext()) {
-			Map.Entry<Integer, ArtBox> en = (Map.Entry<Integer, ArtBox>) iter.next();
-			response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "</p>");
+		for(Map.Entry<Integer, ArtBox> en: ArtBoxCollection) {
+			response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "<br>");
 			response.flushBuffer();
 		}
 	}
