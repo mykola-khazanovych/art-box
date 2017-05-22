@@ -16,8 +16,7 @@ import com.artbox.util.Validator;
 public class FindServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 485135717800530684L;
-	private HttpServletResponse response;
-
+	private static final String ART_BOX_THEME = "theme";
 	public FindServlet() {
 		super();
 	}
@@ -25,45 +24,29 @@ public class FindServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		this.response = response;
+		
+		String theme = request.getParameter(ART_BOX_THEME);
 
-		final String REQUEST_PARAMETER_ART_BOX_THEME = "theme";
-		String theme = request.getParameter(REQUEST_PARAMETER_ART_BOX_THEME);
-
-		boolean inputParameterIsVaild = Validator.isBlank(theme);
-
-		if (inputParameterIsVaild) {
-			this.find(theme);
-		} else {
+		if (Validator.isBlank(theme)) {
 			response.getWriter().append("Please enter non-null/non-empty input value of request parameter!");
 			response.flushBuffer();
+		} else {
+			ArtBoxStorage storage = ArtBoxStorage.getInstance();
+			ArtBox findArtBox = storage.findByTheme(theme);
+
+			if (findArtBox != null) {
+					response.getWriter().append("ArtBox with theme \"" + theme +
+							"\" has been find!" + "</p>" + findArtBox.toString());
+					response.flushBuffer();
+			} else {
+					response.getWriter().append("ERROR! There is no ArtBox with theme \"" + theme + "\" in the storage!");
+					response.flushBuffer();
+			}
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-	}
-
-	private boolean find(String theme) throws ServletException, IOException {
-
-		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		boolean operationSuccessful = false;
-
-		ArtBox findArtBox = storage.findByTheme(theme);
-		if (findArtBox != null) {
-			operationSuccessful = true;
-		}
-
-		if (operationSuccessful) {
-				response.getWriter().append("ArtBox with theme \"" + theme +
-						"\" has been find!" + "</p>" + findArtBox.toString());
-				response.flushBuffer();
-		} else {
-				response.getWriter().append("ERROR! There is no ArtBox with theme \"" + theme + "\" in the storage!");
-				response.flushBuffer();
-		}
-
-		return operationSuccessful;
 	}
 }
