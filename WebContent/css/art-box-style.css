@@ -1,6 +1,10 @@
 @CHARSET "UTF-8";
 
-table#baseLayout, tr#baseLayout, td#baseLayout {
+table#noLayout, tr#noLayout, td#noLayout{
+	border-style: none;
+}
+
+table#baseLayout, tr, td, th {
 	border: 1px solid silver;
 	border-collapse: collapse;
 	text-align: center;
@@ -8,9 +12,7 @@ table#baseLayout, tr#baseLayout, td#baseLayout {
 	
 }
 
-table#baseLayout, td#noLayout{
-	border-style: none;
-}
+
 
 .fillingImage{
 	width: 100%;
