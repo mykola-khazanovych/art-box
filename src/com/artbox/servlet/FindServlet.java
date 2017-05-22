@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.artbox.model.ArtBoxEntity;
+import com.artbox.model.ArtBox;
 import com.artbox.storage.ArtBoxStorage;
 import com.artbox.util.Validator;
 
@@ -30,7 +30,7 @@ public class FindServlet extends HttpServlet {
 		final String REQUEST_PARAMETER_ART_BOX_THEME = "theme";
 		String theme = request.getParameter(REQUEST_PARAMETER_ART_BOX_THEME);
 
-		boolean inputParameterIsVaild = Validator.validateNonNullOrEmptyInput(theme);
+		boolean inputParameterIsVaild = Validator.isBlank(theme);
 
 		if (inputParameterIsVaild) {
 			this.find(theme);
@@ -50,7 +50,7 @@ public class FindServlet extends HttpServlet {
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		boolean operationSuccessful = false;
 
-		ArtBoxEntity findArtBox = storage.findByTheme(theme);
+		ArtBox findArtBox = storage.findByTheme(theme);
 		if (findArtBox != null) {
 			operationSuccessful = true;
 		}

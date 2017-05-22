@@ -29,7 +29,7 @@ public class RemoveServlet extends HttpServlet {
 		final String REQUEST_PARAMETER_ART_BOX_ID = "id";
 		String id = request.getParameter(REQUEST_PARAMETER_ART_BOX_ID);
 
-		boolean inputParameterIsVaild = Validator.validateNonNullOrEmptyInput(id);
+		boolean inputParameterIsVaild = Validator.isBlank(id);
 
 		if (inputParameterIsVaild) {
 			this.remove(id);
