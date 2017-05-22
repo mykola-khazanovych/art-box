@@ -36,7 +36,7 @@ public class ArtBoxStorage {
 		return database.containsValue(item);
 	}
 
-	public boolean removeById(short id) {
+	public boolean removeById(int id) {
 		this.database.remove(id);
 		return !database.containsKey(id);
 	}

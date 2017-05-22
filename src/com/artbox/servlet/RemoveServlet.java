@@ -32,9 +32,9 @@ public class RemoveServlet extends HttpServlet {
 		} else {
 			ArtBoxStorage storage = ArtBoxStorage.getInstance();
 			
-			short id = 0;
+			int id = 0;
 			try {
-			id = Short.parseShort(stringId);
+			id = Integer.parseInt(stringId);
 			} catch (NumberFormatException nfe) {
 				response.getWriter().append("You've entered incorrect 'id' value!");
 				nfe.printStackTrace();
