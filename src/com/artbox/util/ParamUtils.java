@@ -1,6 +1,6 @@
 package com.artbox.util;
 
-public class Validator {
+public class ParamUtils {
 
 	public static boolean isBlank(String... param) {
 		
@@ -17,5 +17,12 @@ public class Validator {
 		}
 
 		return false;
+	}
+
+	public static boolean isNotBlank(String theme, int age, float cost) {
+
+		
+		return true;
+		
 	}
 }

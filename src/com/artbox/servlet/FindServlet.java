@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.model.ArtBox;
 import com.artbox.storage.ArtBoxStorage;
-import com.artbox.util.Validator;
+import com.artbox.util.ParamUtils;
 
 @WebServlet("/find")
 public class FindServlet extends HttpServlet {

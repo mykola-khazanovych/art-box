@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.storage.ArtBoxStorage;
-import com.artbox.util.Validator;
+import com.artbox.util.ParamUtils;
 
 @WebServlet("/remove")
 public class RemoveServlet extends HttpServlet {
@@ -27,6 +27,7 @@ public class RemoveServlet extends HttpServlet {
 		String stringId = request.getParameter(ART_BOX_ID);
 
 		if (Validator.isBlank(stringId)) {
+		boolean inputParameterIsVaild = ParamUtils.isBlank(id);
 			response.getWriter().append("Please enter non-null/non-empty input value of request parameter!");
 			response.flushBuffer();
 		} else {
