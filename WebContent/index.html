@@ -16,7 +16,7 @@
 <TABLE id="noLayout" style="width: 100%">
   <tr>
     <TD id="noLayout" rowspan=6 style="width: 20%"></TD>
-    <TD id="baseLayout" colspan=3 class=".alignCenter"><img src="img/art-box-title.jpg" class="fillingImage alignCenterImg" width="60%"></TD>
+    <TD id="baseLayout" colspan=3 class=".alignCenter" style="padding: 0px"><img src="img/art-box-title.jpg" class="fillingImage alignCenterImg" width="60%"></TD>
     <TD id="noLayout" rowspan=6 style="width: 20%"></TD>
   </tr>
   <tr>
@@ -28,16 +28,21 @@
     <TD id="baseLayout" colspan=3 id="baseLayout" class="loraFont">
    		 <!--  photo from: https://static9.depositphotos.com/1034502/1145/v/950/depositphotos_11450046-stock-illustration-calligraphic-design-elements-and-page.jpg -->
    		 <p><img src="img/calligraphy.jpg"></p>
-   		 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel nibh et ipsum pellentesque venenatis nec non augue.
-			 Mauris ac metus non urna tincidunt efficitur hendrerit sed sem. Morbi sit amet arcu vel sapien lobortis efficitur et at velit.
-			  Proin eu urna feugiat, vestibulum nibh sed, hendrerit massa. Sed varius eu justo at scelerisque.
-
-		<p>Phasellus at turpis sed magna posuere egestas at vestibulum nunc. Nulla facilisi. 
-			Mauris ut metus rhoncus, scelerisque urna eget, consectetur diam. Quisque placerat, ligula ac fringilla pretium, justo velit scelerisque mauris,
-			 eu lobortis nunc tortor non ex. Sed in tincidunt augue. 
-			 Pellentesque tempor ultrices erat, non varius nulla blandit et.</p>
-
-		<p class="textColorFooter">Mauris sed blandit leo. Praesent dapibus, nunc egestas tristique ornare, nunc mauris tristique quam, eu porttitor tellus tortor nec sem. </p>
+   		<h6>Request examples</h6>
+		<p class="alignLeft" style="font-size: 0.7em">CREATE with theme, age and cost:<br>
+		http://localhost:8080/FirstServlet/add?theme=BEARS&age=3&cost=123.00<br>
+		<br>
+		FIND by theme:<br>
+		http://localhost:8080/FirstServlet/find?theme=BEARS<br>
+		<br>
+		DELETE by id:<br>
+		http://localhost:8080/FirstServlet/remove?id=1<br>
+		<br>
+		SHOW ALL ArtBoxes:<br>
+		http://localhost:8080/FirstServlet/list
+		</p>
+		<br>
+		<p class="textColorFooter alignCenter">Make your life happier with kids, make your kids happier with art!</p>
     </TD>
   </tr>
   <tr>
