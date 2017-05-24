@@ -6,10 +6,37 @@ public class ArtBox {
 	private int age;
 	private float cost;
 
-	public ArtBox() {
-		super();
+	public static class Builder {
+		private String theme;
+		private int age;
+		private float cost;
+		
+		public Builder() {
+			super();
+		}
+		
+		public Builder theme (String val) {
+			this.theme = val;
+			return this;
+		}
+		
+		public Builder age (int val) {
+			this.age = val;
+			return this;
+		}
+		
+		public Builder cost (float val) {
+			this.cost = val;
+			return this;
+		}
+		
+		public ArtBox build() {
+			return new ArtBox(this);
+		}
+		
 	}
 	
+
 	public ArtBox(String theme, int age, float cost) {
 		this.theme = theme;
 		this.age = age;
@@ -20,11 +47,9 @@ public class ArtBox {
 		return theme;
 	}
 
-
 	public int getAge() {
 		return age;
 	}
-
 
 	public float getCost() {
 		return cost;
@@ -33,5 +58,11 @@ public class ArtBox {
 	@Override
 	public String toString() {
 		return "ArtBox: theme \"" + theme + "\" recommended age: " + age + " cost (w/o delivery) is " + cost;
+	}
+	
+	private ArtBox(Builder builder) {
+		this.theme = builder.theme;
+		this.age = builder.age;
+		this.cost = builder.cost;
 	}
 }

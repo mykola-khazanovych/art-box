@@ -40,7 +40,12 @@ public class AddServlet extends HttpServlet {
 			float cost = Float.parseFloat(costStr);
 
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-			ArtBox artBox = new ArtBox(theme, age, cost);
+			ArtBox artBox = new ArtBox
+					.Builder()
+					.theme(theme)
+					.age(age)
+					.cost(cost)
+					.build();
 			
 			message = "Error! Artbox can't be added!";
 
