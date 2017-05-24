@@ -1,6 +1,7 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.storage.ArtBoxStorage;
-import com.artbox.util.ParamUtils;
 
 @WebServlet("/remove")
 public class RemoveServlet extends HttpServlet {
@@ -25,32 +25,25 @@ public class RemoveServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String stringId = request.getParameter(ART_BOX_ID);
+		int id;
+		String message;
 
-		if (Validator.isBlank(stringId)) {
-		boolean inputParameterIsVaild = ParamUtils.isBlank(id);
-			response.getWriter().append("Please enter non-null/non-empty input value of request parameter!");
-			response.flushBuffer();
-		} else {
-			ArtBoxStorage storage = ArtBoxStorage.getInstance();
-			
-			int id = 0;
-			try {
+		try {
+
 			id = Integer.parseInt(stringId);
-			} catch (NumberFormatException nfe) {
-				response.getWriter().append("You've entered incorrect 'id' value!");
-				nfe.printStackTrace();
-				response.flushBuffer();
-				this.destroy();
+			ArtBoxStorage storage = ArtBoxStorage.getInstance();
+
+			message = "ERROR! There is no ArtBox with id" + id + " in the storage!";
+			if (storage.removeById(id)) {
+				message = "ArtBox with id=" + id + " has been successfully removed!";
 			}
 			
-			if (storage.removeById(id)) {
-					response.getWriter().append("ArtBox with id=" + id + " has been successfully removed!");
-					response.flushBuffer();
-			} else {
-					response.getWriter().append("ERROR! There is no ArtBox with id" + id + " in the storage!");
-					response.flushBuffer();
-			}
+		} catch (NumberFormatException nfe) {
+			message = "You've entered incorrect 'id' value!";
 		}
+
+		PrintWriter out = response.getWriter();
+		out.println(message);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
