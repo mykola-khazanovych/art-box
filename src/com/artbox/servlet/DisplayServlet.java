@@ -1,8 +1,8 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,17 +25,16 @@ public class DisplayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		PrintWriter out = response.getWriter();
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		Set<Map.Entry<Integer, ArtBox>> ArtBoxCollection = storage.getDatabase();
+		Map<Integer, ArtBox> artBoxCollection = storage.getAll();
 
-		if (ArtBoxCollection.isEmpty()) {
-			response.getWriter().append("Sorry! Database is empty!");
-			response.flushBuffer();
+		if (artBoxCollection.isEmpty()) {
+			out.println("Sorry! Database is empty!");
 		}
 
-		for(Map.Entry<Integer, ArtBox> en: ArtBoxCollection) {
-			response.getWriter().append("id = " + en.getKey() + " " + en.getValue().toString() + "<br>");
-			response.flushBuffer();
+		for(Map.Entry<Integer, ArtBox> en: artBoxCollection.entrySet()) {
+			out.println("id = " + en.getKey() + " " + en.getValue().toString() + "<br>");
 		}
 	}
 
