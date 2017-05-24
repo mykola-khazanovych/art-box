@@ -1,10 +1,10 @@
 @CHARSET "UTF-8";
 
-table#noLayout, tr#noLayout, td#noLayout{
+.noLayout{
 	border-style: none;
 }
 
-table#baseLayout, tr, td, th {
+.baseLayout, tr, td, th {
 	border: 1px solid silver;
 	border-collapse: collapse;
 	text-align: center;
