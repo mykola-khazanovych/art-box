@@ -11,7 +11,7 @@ public class ArtBoxStorage {
 
 	private static volatile ArtBoxStorage instance;
 	private static volatile int id = 1;
-	private volatile Map<Integer, ArtBox> database = Collections.synchronizedMap(new HashMap<>());
+	private volatile Map<Integer, ArtBox> database = new HashMap<>();
 
 	private ArtBoxStorage() {
 	};
