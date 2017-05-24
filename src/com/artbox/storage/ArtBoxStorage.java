@@ -37,8 +37,7 @@ public class ArtBoxStorage {
 
 	public boolean removeById(int id) {
 		
-		this.database.remove(id);
-		return !database.containsKey(id);
+		return this.database.remove(id) != null ? true : false;
 	}
 
 	public ArtBox findByTheme(String theme) {
