@@ -3,9 +3,7 @@ package com.artbox.storage;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import com.artbox.model.ArtBox;
 
@@ -31,23 +29,23 @@ public class ArtBoxStorage {
 	}
 
 	public boolean add(ArtBox item) {
+		
 		this.database.put(id, item);
 		id++;
 		return database.containsValue(item);
 	}
 
 	public boolean removeById(int id) {
+		
 		this.database.remove(id);
 		return !database.containsKey(id);
 	}
 
 	public ArtBox findByTheme(String theme) {
 
-		Collection<ArtBox> ArtBoxCollection = this.database.values();
-		Iterator<ArtBox> iter = ArtBoxCollection.iterator();
-
-		while (iter.hasNext()) {
-			ArtBox en = (ArtBox) iter.next();
+		Collection<ArtBox> artBoxCollection = this.database.values();
+		
+		for(ArtBox en: artBoxCollection) {
 			if (en.getTheme().equalsIgnoreCase(theme)) {
 				return en;
 			}
@@ -56,8 +54,8 @@ public class ArtBoxStorage {
 		return null;
 	}
 
-	public Set<Map.Entry<Integer, ArtBox>> getDatabase() {
+	public Map<Integer, ArtBox> getAll() {
 
-		return Collections.unmodifiableSet(this.database.entrySet());
+		return Collections.unmodifiableMap(this.database);
 	}
 }
