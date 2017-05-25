@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ArtBox for KIDS</title>
-	<link rel="stylesheet" type="text/css" href="css/art-box-style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="fonts/LoraFont.css">
 </head>
 
@@ -25,7 +25,11 @@
   <tr>
     <td colspan=3 class="loraFont">
     	<br>
-		<p><input type="text" name="theme" value="ArtBox set name (input All to see full list):" size=50  class="loraFont"> <input type="submit" value="Search"></p>
+		<p style="font-size: 0.8em">
+			ArtBox set name (<i>left blank to see full list</i>):
+			<input type="text" name="theme" size=40  class="loraFont">
+			<input type="submit" value="Search">
+		</p>
 			<table class="baseLayout" style="width: 100%">
 				<tr>
 					<th>#</th>		
@@ -61,7 +65,14 @@
     </td>
   </tr>
   <tr>
-    <td colspan=3 class="backgroundColorCells baseLayout"><a href="https://www.facebook.com/babyartbox/?fref=ts"><img src="img/facebook-icon-40x40.png" class="alignCenterImg"></a></td>
+   <td colspan=3 class="backgroundColorCells baseLayout">
+    	<fieldset style="border: 1px solid #9999ff">
+    		<legend class="textColorFooter" >Find us in social networks</legend>
+    		<a href="https://www.facebook.com/babyartbox/?fref=ts">
+    			<img src="img/facebook-icon-40x40.png" class="alignCenterImg">
+    		</a>
+    	</fieldset>
+    </td>
   </tr>
 </table>
  

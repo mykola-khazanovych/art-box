@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ArtBox for KIDS</title>
-	<link rel="stylesheet" type="text/css" href="css/art-box-style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="fonts/LoraFont.css">
 </head>
 
@@ -24,8 +24,8 @@
   <tr>
     <td colspan=3 class="loraFont baseLayout">
 		<form>
- 			<fieldset>
-  			  <legend>Define ArtBoxSet:</legend>
+ 			<fieldset class="baseLayout">
+  			  <legend class="textColorGray">Define ArtBoxSet</legend>
   				<br>
     			<br>
    			    <table style="width: 100%" class="noLayout">
@@ -33,20 +33,23 @@
     					<td style="width: 10%" class="noLayout"></td>
     					<td style="width: 80%" class="noLayout">
     						<table style="width: 100%" class="noLayout">
-    							<tr class="noLayout">
-    								<td class="alignRight noLayout" class="noLayout">ArtBox set name:</td>
-    								<td class="noLayout"><input type="text" name="theme" value="BEARS"><br></td>
+    							<tr class="noLayout noPadding">
+    								<td class="alignRight noLayout">ArtBox set name:</td>
+    								<td class="noLayout noPadding alignLeft"><input type="text" name="theme" value="BEARS"><br></td>
     							</tr>
-    							<tr class="noLayout">
+    							<tr class="noLayout noPadding">
         							<td class="alignRight noLayout">Reccomended age from:</td>
-    								<td class="noLayout"> <input type="text" name="age" value="3"><br></td>
+    								<td class="noLayout noPadding alignLeft"> <input type="text" name="age" value="3"><br></td>
     							</tr>
-    							<tr class="noLayout">
+    							<tr class="noLayout noPadding">
         							<td class="alignRight noLayout">Recommended cost (UAH):</td>
-    								<td class="noLayout"><input type="text" name="cost" value="215"><br></td>
+    								<td class="noLayout noPadding alignLeft"><input type="text" name="cost" value="215"><br></td>
     							</tr>
     							<tr class="noLayout">
-    								<td colspan=3 class="alignCenter noLayout"><br> <input type="submit" value="Submit"></td>
+    								<td colspan=3 class="alignCenter noLayout">
+    									<br>
+    									<input type="submit" value="Add" class="addPadding">
+    								</td>
     							</tr>
     						</table>
     					</td>
@@ -61,7 +64,14 @@
     </td>
 </tr>
   <tr>
-    <td colspan=3 class="backgroundColorCells baseLayout"><a href="https://www.facebook.com/babyartbox/?fref=ts"><img src="img/facebook-icon-40x40.png" class="alignCenterImg"></a></td>
+   <td colspan=3 class="backgroundColorCells baseLayout">
+    	<fieldset style="border: 1px solid #9999ff">
+    		<legend class="textColorFooter" >Find us in social networks</legend>
+    		<a href="https://www.facebook.com/babyartbox/?fref=ts">
+    			<img src="img/facebook-icon-40x40.png" class="alignCenterImg">
+    		</a>
+    	</fieldset>
+    </td>
   </tr>
 </table>
  

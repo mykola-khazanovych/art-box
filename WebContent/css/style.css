@@ -12,6 +12,15 @@
 	padding: 15px;
 }
 
+.noPadding{
+	padding: 0px;
+}
+
+.addPadding{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
 .fillingImage{
 	width: 100%;
 	border-radius: 3px;
@@ -30,7 +39,6 @@
 	text-align: right;
 }
 
-
 .alignLeft{
 	text-align: left;
 }
@@ -47,4 +55,8 @@
 .textColorFooter{
 	color: #8080ff;
 	<!-- light navy blue-->
+}
+
+.textColorGray{
+	color: gray;
 }
