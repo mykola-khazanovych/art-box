@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.model.ArtBox;
-import com.artbox.model.ArtBoxBuilder;
+import com.artbox.builder.ArtBoxBuilder;
 import com.artbox.storage.ArtBoxStorage;
 
 @WebServlet("/add")

@@ -1,16 +1,12 @@
 package com.artbox.model;
 
+import com.artbox.builder.ArtBoxBuilder;
+
 public class ArtBox {
 
 	private String theme;
 	private int age;
 	private float cost;
-
-	public ArtBox(String theme, int age, float cost) {
-		this.theme = theme;
-		this.age = age;
-		this.cost = cost;
-	}
 
 	public ArtBox(ArtBoxBuilder builder) {
 		this.theme = builder.getTheme();

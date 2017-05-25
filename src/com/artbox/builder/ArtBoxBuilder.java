@@ -1,4 +1,6 @@
-package com.artbox.model;
+package com.artbox.builder;
+
+import com.artbox.model.ArtBox;
 
 public class ArtBoxBuilder {
 	
