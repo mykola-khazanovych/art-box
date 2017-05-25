@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.artbox.model.ArtBox;
+import com.artbox.model.ArtBoxBuilder;
 import com.artbox.storage.ArtBoxStorage;
 
 @WebServlet("/add")
@@ -40,8 +41,7 @@ public class AddServlet extends HttpServlet {
 			float cost = Float.parseFloat(costStr);
 
 			ArtBoxStorage artboxStorage = ArtBoxStorage.getInstance();
-			ArtBox artBox = new ArtBox
-					.Builder()
+			ArtBox artBox = new ArtBoxBuilder()
 					.theme(theme)
 					.age(age)
 					.cost(cost)
