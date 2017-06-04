@@ -18,8 +18,8 @@
   </tr>
   <tr>
     <td style="width: 20%" class="loraFont backgroundColorCells baseLayout">Home</td>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="add.html">Add</a></td>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="dashboard.html">Dashboard</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="add">Add</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="find">Dashboard</a></td>
   </tr>
   <tr>
     <td colspan=3 class="loraFont baseLayout">

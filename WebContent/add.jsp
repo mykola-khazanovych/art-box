@@ -17,11 +17,9 @@
     <td rowspan=5 class="noLayout" style="width: 20%"></td>
   </tr>
   <tr>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout">
-    	<!-- http://localhost:8080/art-box/intro -->
-    	<a href="<%="http://"%>${ header["host"] }${ pageContext.request.contextPath }<%="/intro"%>">Home</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="home">Home</a></td>
     <td style="width: 20%" class="loraFont backgroundColorCells baseLayout">Add</td>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="dashboard.html">Dashboard</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="find">Dashboard</a></td>
   </tr>
   <tr>
     <td colspan=3 class="loraFont baseLayout">

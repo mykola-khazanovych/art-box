@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class IntroServlet
  */
-@WebServlet("/intro")
-public class IntroServlet extends HttpServlet {
+@WebServlet("/home")
+public class HomeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 5914647821821437185L;
 
-	public IntroServlet() {
+	public HomeServlet() {
         super();
     }
 

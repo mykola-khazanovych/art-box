@@ -24,7 +24,12 @@ public class FindServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.sendRedirect("dashboard.jsp");
+		
+	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String theme = request.getParameter(ART_BOX_THEME);
 
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
@@ -38,10 +43,5 @@ public class FindServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		out.println(message);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

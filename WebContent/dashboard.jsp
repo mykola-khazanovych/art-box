@@ -18,8 +18,8 @@
     <td rowspan=5  class="noLayout" style="width: 20%"></td>
   </tr>
   <tr>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="index.html">Home</a></td>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="add.html">Add</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="home">Home</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="add">Add</a></td>
     <td style="width: 20%" class="loraFont backgroundColorCells baseLayout">Dashboard</td>
   </tr>
   <tr>
