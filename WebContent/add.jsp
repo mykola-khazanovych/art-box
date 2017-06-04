@@ -19,14 +19,15 @@
   <tr>
     <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="home">Home</a></td>
     <td style="width: 20%" class="loraFont backgroundColorCells baseLayout">Add</td>
-    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="find">Dashboard</a></td>
+    <td style="width: 20%" class="loraFont backgroundColorCells baseLayout"><a href="list">Dashboard</a></td>
   </tr>
   <tr>
     <td colspan=3 class="loraFont baseLayout">
-		<form>
+		<form method="post" action="add">
  			<fieldset class="baseLayout">
   			  <legend class="textColorGray">Define ArtBoxSet</legend>
   				<br>
+  				<p class="${textColor}">${message}</p>
     			<br>
    			    <table style="width: 100%" class="noLayout">
     				<tr class="noLayout">

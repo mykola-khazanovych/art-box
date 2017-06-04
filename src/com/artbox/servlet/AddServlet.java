@@ -1,7 +1,6 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,6 +39,7 @@ public class AddServlet extends HttpServlet {
 		String costStr = request.getParameter(ART_BOX_COST);
 
 		String message;
+		String textColor;
 
 		try {
 
@@ -50,18 +50,21 @@ public class AddServlet extends HttpServlet {
 			ArtBox artBox = new ArtBoxBuilder().theme(theme).age(age).cost(cost).build();
 
 			message = "Error! Artbox can't be added!";
+			textColor = "textColorRed";
 
 			if (artboxStorage.add(artBox)) {
 
-				message = "Success! Artbox has been added!";
+				message = "Success! Artbox '" + theme + "' has been added!";
+				textColor = "textColorGreen";
 			}
 
 		} catch (NumberFormatException nfe) {
 
 			message = "Error! Number format error! Please enter correct values for ArtBox'es 'theme', 'age' and 'cost'!";
+			textColor = "textColorRed";
 		}
-
-		PrintWriter out = response.getWriter();
-		out.println(message);
+		request.setAttribute("message", message);
+		request.setAttribute("textColor", textColor);
+        request.getRequestDispatcher("/add.jsp").forward(request, response);
 	}
 }

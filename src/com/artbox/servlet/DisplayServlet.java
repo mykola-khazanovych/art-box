@@ -25,6 +25,12 @@ public class DisplayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		response.sendRedirect("dashboard.jsp");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
 		PrintWriter out = response.getWriter();
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		Map<Integer, ArtBox> artBoxCollection = storage.getAll();
@@ -36,10 +42,5 @@ public class DisplayServlet extends HttpServlet {
 		for(Map.Entry<Integer, ArtBox> en: artBoxCollection.entrySet()) {
 			out.println("id = " + en.getKey() + " " + en.getValue().toString() + "<br>");
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
 	}
 }

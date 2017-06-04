@@ -60,3 +60,12 @@
 .textColorGray{
 	color: gray;
 }
+
+.textColorRed{
+	color: red;
+}
+
+.textColorGreen{
+	color: #00ff00;
+	<!-- light green 'lime'-->
+}
