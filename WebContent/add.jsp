@@ -39,7 +39,7 @@
     								<td class="noLayout noPadding alignLeft"><input type="text" name="theme" value="BEARS"><br></td>
     							</tr>
     							<tr class="noLayout noPadding">
-        							<td class="alignRight noLayout">Reccomended age from:</td>
+        							<td class="alignRight noLayout">Recommended age from:</td>
     								<td class="noLayout noPadding alignLeft"> <input type="text" name="age" value="3"><br></td>
     							</tr>
     							<tr class="noLayout noPadding">

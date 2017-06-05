@@ -1,7 +1,7 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,15 +29,29 @@ public class FindServlet extends HttpServlet {
 
 		ArtBoxStorage storage = ArtBoxStorage.getInstance();
 		ArtBox findArtBox = storage.findByTheme(theme);
+		Map<Integer, ArtBox> artBoxCollection = storage.getAll();
 
 		String message = "ERROR! There is no ArtBox with entered theme \'" + theme + "\' in the storage!";
+		String textColor = "textColorRed";
+		
+		if(theme.isEmpty()) {
+			message="";
+			if(artBoxCollection.isEmpty()) {
+				message = "Sorry! Database is empty!";
+				textColor = "textColorRed";
+			}
+			request.setAttribute("products", artBoxCollection.entrySet());
+		}
+		
 		if (findArtBox != null) {
-			message = "<i>" + "ArtBox with theme \"" + theme + "\" has been find!" + "</i>" + "<br>"
-					+ findArtBox.toString();
+			message = "ArtBox with theme \"" + theme + "\" has been found!";
+			textColor = "textColorGreen";
+			request.setAttribute("artbox", findArtBox);
 		}
 
-		PrintWriter out = response.getWriter();
-		out.println(message);
+		request.setAttribute("message", message);
+		request.setAttribute("textColor", textColor);
+		request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
