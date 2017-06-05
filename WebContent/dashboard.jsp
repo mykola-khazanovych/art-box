@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 <head>
@@ -29,36 +32,18 @@
 			ArtBox set name (<i>left blank to see full list</i>):
 			<input type="text" name="theme" size=40  class="loraFont">
 			<input type="submit" value="Search">
+			${message}
 		</p>
 			<table class="baseLayout" style="width: 100%">
-				<tr>
-					<th>#</th>		
-					<th>Title</th>		
-					<th>Description</th>		
-					<th>Cost</th>		
-					<th></th>	
-				</tr>	
-				<tr>
-					<td>1.</td>
-					<td>BEARS</td>
-					<td>Bears logo collection.</td>
-					<td>223, 00</td>
-					<td><input type="submit" value="Delete"></td>
-				</tr>
-				<tr>
-					<td>2.</td>
-					<td>TOTORO</td>
-					<td>TOTORO logo collection.</td>
-					<td>180, 00</td>
-					<td><input type="submit" value="Delete"></td>
-				</tr>
-				<tr>
-					<td>3.</td>
-					<td>TRAVEL</td>
-					<td>TRAVEL logo collection.</td>
-					<td>240, 00</td>
-					<td><input type="submit" value="Delete"></td>
-				</tr>
+				<c:forEach items="${products}" var="product">
+        		<tr>
+            		<td>${product.getKey()}</td>
+         		    <td>${product.getValue().getTheme()}</td>
+                    <td>${product.getValue().getAge()}</td>
+       		        <td>${product.getValue().getCost()}</td>
+       		        <td><input type="submit" value="Delete"></td>
+    		    </tr>
+    			</c:forEach>
 			</table>
 		
 		<p class="textColorFooter loraFont">Make your life happier with kids, make your kids happier with art!</p>

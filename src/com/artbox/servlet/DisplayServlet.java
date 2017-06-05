@@ -1,7 +1,6 @@
 package com.artbox.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -25,22 +24,24 @@ public class DisplayServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.sendRedirect("dashboard.jsp");
+		ArtBoxStorage storage = ArtBoxStorage.getInstance();
+		Map<Integer, ArtBox> artBoxCollection = storage.getAll();
+
+		request.setAttribute("products", artBoxCollection.entrySet());
+
+		String message = "";
+		if (artBoxCollection.isEmpty()) {
+			message = "Sorry! Database is empty!";
+			request.setAttribute("message", message);
+			request.setAttribute("textColor", "textColorRed");
+		}
+
+		request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();
-		ArtBoxStorage storage = ArtBoxStorage.getInstance();
-		Map<Integer, ArtBox> artBoxCollection = storage.getAll();
 
-		if (artBoxCollection.isEmpty()) {
-			out.println("Sorry! Database is empty!");
-		}
-
-		for(Map.Entry<Integer, ArtBox> en: artBoxCollection.entrySet()) {
-			out.println("id = " + en.getKey() + " " + en.getValue().toString() + "<br>");
-		}
+		this.doGet(request, response);
 	}
 }
