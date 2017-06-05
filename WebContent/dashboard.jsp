@@ -4,6 +4,9 @@
 <%@ page import="java.util.Set"%>
 <%@ page import="com.artbox.model.ArtBox"%>
 
+<!-- for JSTL version of the result table -->
+<%--@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" --%> 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -43,7 +46,7 @@
 			<p class=${textColor}>${message}</p>
 			<p style="font-size: 0.8em">${artbox}</p>
 	
-	<!-- Hardcore version using no DSTL -->
+	<!-- Hardcore version using no JSTL -->
 	<%	Set<Entry<Integer, ArtBox>> artBoxCollection = (Set<Entry<Integer, ArtBox>>) request.getAttribute("products");
 		
 		//if database is empty we do not need tp print empty table
@@ -95,7 +98,7 @@
 			out.print("</table>");
 		}
 		%>
-		<!-- DSTL version of result table -->
+		<!-- JSTL version of result table -->
 		<!-- <table class="baseLayout" style="width: 100%">
 				<tr>
 					<td>id</td>
