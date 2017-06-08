@@ -47,57 +47,43 @@
 			<p style="font-size: 0.8em">${artbox}</p>
 	
 	<!-- Hardcore version using no JSTL -->
-	<%	Set<Entry<Integer, ArtBox>> artBoxCollection = (Set<Entry<Integer, ArtBox>>) request.getAttribute("products");
+	<%	Set<Entry<Integer, ArtBox>> artBoxCollection = (Set<Entry<Integer, ArtBox>>) request.getAttribute("products");%>
 		
-		//if database is empty we do not need tp print empty table
-		if(request.getAttribute("products") != null && !artBoxCollection.isEmpty()){
-			out.print("<table class=\"baseLayout\" style=\"width: 100%\">");
+		<!-- if database is empty we do not need tp print empty table -->
+		<% if(request.getAttribute("products") != null && !artBoxCollection.isEmpty()){%>
 			
-				//Printing header for result table
-				out.print("<tr>");
+			<table class="baseLayout" style="width: 100%">
 			
-					out.print("<th>");
-					out.print("id");
-					out.print("</th>");
-
-					out.print("<th>");
-					out.print("theme");
-					out.print("</th>");
-
-					out.print("<th>");
-					out.print("age");
-					out.print("</th>");
-	
-					out.print("<th>");
-					out.print("cost");
-					out.print("</th>");
-			
-					out.print("<th>");
-					out.print("</th>");
-
-				out.print("</tr>");
+				<!-- Printing header for result table -->
+				<tr>
+					<th>id</th>
+     				<th>theme</th>
+					<th>age</th>
+					<th>cost</th>
+					<th><!-- Empty header under the delete-buttons column --></th>
+				</tr>
 				
-			//filling table with database entries
-			for(Entry<Integer, ArtBox> product: artBoxCollection){
-				out.print("<tr>");
-				//filling — id | theme | age | cost — cells
-				out.print("<td>" + product.getKey() + "</td>");
-				out.print("<td>" + product.getValue().getTheme() + "</td>");
-				out.print("<td>" + product.getValue().getAge() + "</td>");
-				out.print("<td>" + product.getValue().getCost() + "</td>");
-				out.print("<td>");
-				//making delete button able to pass the 'id'
-				out.print("<form action=\"remove\" method=\"post\">");
-				out.print("<input type=\"submit\" value=\"Delete\">");
-				out.print("<input type=\"hidden\" name=\"id\" value=\"" + product.getKey() + "\">");
-				out.print("</form>");
-				
-				out.print("</td>");
-				out.print("</tr>");
-			}	
-			out.print("</table>");
-		}
-		%>
+			<!-- filling table with database entries  -->
+			
+			<% for(Entry<Integer, ArtBox> product: artBoxCollection){ %>
+				<tr>
+				<!-- filling — id | theme | age | cost — cells -->
+				<td><%= product.getKey()%></td>
+				<td><%= product.getValue().getTheme()%></td>
+				<td><%= product.getValue().getAge()%></td>
+				<td><%= product.getValue().getCost()%></td>
+				<td>
+					<!-- making delete button able to pass the 'id' -->
+					<form action="remove" method="post">
+					<input type="submit" value="Delete">
+					<input type="hidden" name="id" value="<%=product.getKey()%>">
+					</form>
+				</td>
+				</tr>
+			<%} %>	
+			</table>
+		<%}%>
+		
 		<!-- JSTL version of result table -->
 		<!-- <table class="baseLayout" style="width: 100%">
 				<tr>
