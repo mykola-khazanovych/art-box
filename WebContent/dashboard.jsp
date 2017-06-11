@@ -57,7 +57,7 @@
 				<!-- Printing header for result table -->
 				<tr>
 					<th>id</th>
-     				<th>theme</th>
+					<th>theme</th>
 					<th>age</th>
 					<th>cost</th>
 					<th><!-- Empty header under the delete-buttons column --></th>
