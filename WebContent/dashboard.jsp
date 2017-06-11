@@ -53,9 +53,14 @@
 		<% if(request.getAttribute("products") != null && !artBoxCollection.isEmpty() && artBoxCollection != null){%>
 			
 			<table class="baseLayout" style="width: 100%">
-			
-				
-				
+			<!-- Printing header for result table -->
+				<tr>
+					<th>id</th>
+					<th>theme</th>
+					<th>age</th>
+					<th>cost</th>
+					<th><!-- Empty header under the delete-buttons column --></th>
+				</tr>
 			<!-- filling table with database entries  -->
 			
 			<% for(Entry<Integer, ArtBox> product: artBoxCollection){ %>
