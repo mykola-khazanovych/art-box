@@ -49,8 +49,8 @@
 	<!-- Hardcore version using no JSTL -->
 	<%	Set<Entry<Integer, ArtBox>> artBoxCollection = (Set<Entry<Integer, ArtBox>>) request.getAttribute("products");%>
 		
-		<!-- if database is empty we do not need tp print empty table -->
-		<% if(request.getAttribute("products") != null && !artBoxCollection.isEmpty()){%>
+		<!-- if database is empty we do not need to print empty table -->
+		<% if(request.getAttribute("products") != null && !artBoxCollection.isEmpty() && artBoxCollection != null){%>
 			
 			<table class="baseLayout" style="width: 100%">
 			
