@@ -1,12 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.Map.Entry"%>
-<%@ page import="java.util.Set"%>
-<%@ page import="com.artbox.model.ArtBox"%>
-
-<!-- for JSTL version of the result table -->
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
-<%@ page contentType="text/html; charset=UTF-8" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -41,11 +34,15 @@
 					<input type="submit" value="Search">
 				</form>
 			</p>
+				
 		
 			<br/>
 			<p class=${textColor}>${message}</p>
 			<p style="font-size: 0.8em">${artbox}</p>
 	
+		<!-- if database is empty we do not need to print empty table -->
+		<c:if test="${not empty products}">
+			
 		<!-- JSTL version of result table -->
 		<table class="baseLayout" style="width: 100%">
 				<tr>
@@ -59,21 +56,21 @@
 				<c:forEach items="${products}" var="product">
         		
         		<tr>
-            		<td>${product.getKey()}</td>
-         		    <td>${product.getValue().getTheme()}</td>
-                    <td>${product.getValue().getAge()}</td>
-       		        <td>${product.getValue().getCost()}</td>
+            		<td>${product.key}</td>
+         		    <td>${product.value.theme}</td>
+                    <td>${product.value.age}</td>
+       		        <td>${product.value.cost}</td>
        		        
        		        <td>
        		        <form action="remove" method="post">
        		        	<input type="submit" value="Delete">
-       		        	<input type="hidden" name="id" value="${product.getKey()}">
+       		        	<input type="hidden" name="id" value="${product.key}">
        		        	</form>
        		        </td>
     		    </tr>
     			</c:forEach>
 			</table>	
-		
+		</c:if>
 		<p class="textColorFooter loraFont">Make your life happier with kids, make your kids happier with art!</p>
     </td>
   </tr>
@@ -88,6 +85,5 @@
     </td>
   </tr>
 </table>
- 
 </body>
 </html>
